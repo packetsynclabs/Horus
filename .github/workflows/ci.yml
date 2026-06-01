@@ -1,0 +1,16 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: sudo apt-get update && sudo apt-get install -y build-essential make nasm xorriso grub-pc-bin
+    - run: make clean && make BITS=64
+    - uses: actions-rs/toolchain@v1
+      with: { toolchain: stable, override: true }
+    - run: cargo test --manifest-path rust/Cargo.toml --release
+    - run: make clean && make all
+    - run: echo "✅ CI passed - security tests active"

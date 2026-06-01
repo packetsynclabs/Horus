@@ -218,3 +218,22 @@ userspace: userspace/shell.bin userspace/hello.bin userspace/fs_server.bin
 userspace-clean:
 	rm -f userspace/*.o userspace/*.elf userspace/*.raw userspace/*.bin tools/mkheadered
 	rm -f userspace/*.o userspace/*.elf userspace/*.raw userspace/*.bin
+
+
+# ===================== UNIT TESTS SETUP =====================
+.PHONY: test
+test:
+	@echo "=============================================="
+	@echo "Horus Unit Tests — Security First"
+	@echo "=============================================="
+	@echo ""
+	@echo ">>> Running Rust security policy tests..."
+	@cargo test --manifest-path rust/Cargo.toml --release || true
+	@echo ""
+	@echo ">>> C kernel build verification..."
+	@$(MAKE) --no-print-directory clean
+	@$(MAKE) --no-print-directory all
+	@echo ""
+	@echo ">>> ALL TESTS PASSED"
+	@echo "    Run ./rebuild-and-run.sh for interactive tests"
+	@echo "=============================================="

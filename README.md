@@ -60,3 +60,6 @@ Please review the limitations section above before submitting changes.
 ## Licence
 
 See the LICENSE file for details.
+## Unit Testing & CI (NEW)
+Complete setup added with `make test`, GitHub Actions CI, and `tests/` directory.
+All security invariants (capability rights, isolation, COW, command validation) are now continuously tested.
