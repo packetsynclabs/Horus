@@ -1,0 +1,105 @@
+# Horus Microkernel - .gitignore
+# Professional kernel development hygiene
+
+# =============================================================================
+# Build artifacts (never commit these)
+# =============================================================================
+*.o
+*.a
+*.bin
+*.elf
+*.raw
+*.iso
+*.img
+kernel.elf
+boot.iso
+horus.iso
+
+# Rust build outputs
+rust/target/
+Cargo.lock
+
+# Tools
+tools/mkheadered
+
+# =============================================================================
+# Userspace binaries (generated)
+# =============================================================================
+userspace/*.bin
+userspace/*.elf
+userspace/*.o
+userspace/*.raw
+
+# =============================================================================
+# QEMU / runtime artifacts (never commit)
+# =============================================================================
+*.log
+qemu.log
+*.trace
+*.dump
+serial.log
+debug.log
+
+# =============================================================================
+# Temporary and editor files
+# =============================================================================
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# =============================================================================
+# Sensitive / personal information (CRITICAL - never commit)
+# =============================================================================
+# Any potential secrets, tokens, or keys
+*.pem
+*.key
+*.crt
+*.p12
+id_rsa*
+id_ed25519*
+*.token
+*.secret
+.env
+.env.local
+.env.*.local
+secrets/
+credentials/
+passwords.txt
+
+# Personal development notes that might contain private info
+NOTES.md
+TODO-personal.md
+private/
+personal/
+
+# =============================================================================
+# Large or unnecessary generated content
+# =============================================================================
+isofiles/
+iso/
+build/
+dist/
+
+# =============================================================================
+# OS-specific
+# =============================================================================
+# Windows
+*.exe
+*.dll
+*.pdb
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
