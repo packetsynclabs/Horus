@@ -185,6 +185,8 @@ void set_tss_kernel_stack(uintptr_t esp0);
 void tss_flush(void);
 
 void idt_init(void);
+void idt_init64(void);
+void pic_init(void);   /* Exposed for 64-bit boot path */
 
 void paging_init(void);
 void create_user_pagedir(uint32_t task_id);

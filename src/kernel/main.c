@@ -99,9 +99,11 @@ void kernel_main(uint32_t mb_info) {
     /* PHASE 2 - CPU tables (GDT/IDT from trampoline already live, legacy skipped) */
     print_section("CPU STRUCTURES & INTERRUPT DESCRIPTORS", 0x0B);
     set_text_colour(0x0F);
-    println("  [....] 64-bit GDT (L-bit) + early exception environment from trampoline");
+    println("  [....] 64-bit GDT (L-bit) + full IDT with IST for critical exceptions");
+    idt_init64();
+    pic_init();
     set_text_colour(0x0A);
-    println("  [ OK ] Long mode GDT + basic IDT foundation active");
+    println("  [ OK ] 64-bit IDT populated and PIC remapped");
 
     print_blanks(2);
 
@@ -197,6 +199,9 @@ void kernel_main(uint32_t mb_info) {
     set_text_colour(0x0E);
     println("Type 'help' for the full command list. Kernel shell ready.");
     print_blanks(3);
+
+    /* Enable interrupts now that a proper 64-bit IDT and PIC remapping are live */
+    __asm__ volatile ("sti");
 
     current_task = 0;
 
